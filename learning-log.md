@@ -93,3 +93,40 @@ IQueryable ka Where:  EnumerableQuery`1
 **Samajh nahi aaya:** Expression tree andar se kaise padhi jati hai aur SQL kaise banta hai?
 
 ---
+
+
+## 2026-10-12 (Week 2) - Lesson 3: Delegates, Lambda, Func, Action
+
+**Concept:**
+- Delegate = method ko variable ki tarah pakadna (hukm ka card). Signature fix hoti hai.
+- `Func<...>`: return karta hai, aakhri type = return type. `Func<int, string, bool>` = inputs (int, string), return bool.
+- `Action<...>`: kuch return nahi karta (void), return kar hi nahi sakta.
+- Lambda = chhota method wahin likha hua. `n => n % 2 == 0` = "n lo, n % 2 == 0 wapas do".
+
+**Masla jo delegate hal karta hai:** har rule ke liye alag filter method (copy paste). Ab ek `MyWhere(list, rule)` aur alag lambdas.
+
+**MyWhere trace:** `rule(item)` ka matlab pass kiya hua method chalana. `MyWhere(numbers, isEven)` mein rule = isEven.
+- Bina brackets = method pass karna. Brackets ke saath = method chalana.
+
+**Lesson 2 se link:** `IEnumerable.Where` leta hai `Func<T,bool>`. `IQueryable.Where` leta hai `Expression<Func<T,bool>>`. Lambda same likhta hoon, compiler decide karta hai ke method banana hai ya parchi.
+
+**Method vs lambda:**
+- Method mein parameter ka type zaroori: `static bool isEven(int n)`.
+- Func + lambda mein type left side par hota hai, isliye lambda mein `n` ka type nahi likhna parta.
+- Chhota rule = lambda. Bara/dobara use hone wala = naam wala method.
+
+**Lab 03 result:**
+```
+True
+False
+Message:Hello
+2,4
+4,5
+```
+(list `{1,2,3,4,5}` thi.)
+
+**Toota:** `static bool isEven(n)` likha tha (type missing). Fix: `int n`.
+
+**Samajh nahi aaya:** (yahan likho)
+
+---										
