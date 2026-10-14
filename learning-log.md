@@ -129,4 +129,37 @@ Message:Hello
 
 **Samajh nahi aaya:** (yahan likho)
 
----										
+---						
+
+
+## 2026-10-14 (Week 2) - Lesson 4: Collections (List, Dictionary, HashSet)
+
+**Concept:**
+- List<T> = ordered, index se tez (`cart[1]`), lekin dhoondna dheema O(n). Misaal: register mein naam dhoondna.
+- Dictionary<K,V> = key se value seedha O(1), key unique. Misaal: phone contacts.
+- HashSet<T> = unique items, `Contains` tez O(1). Misaal: guest list.
+- O(1) = data kitna bhi ho steps same. O(n) = data double to steps double.
+
+**Real-life Mercato bug:** loop ke andar `products.First(p => p.Id == id)` (1000 items × 1 lakh products = ~10 crore checks).
+Fix: `var productsById = products.ToDictionary(p => p.Id);` ek baar, phir `productsById[id]`.
+
+**Kab kaunsa:**
+- List: order chahiye, index se kaam, sirf loop.
+- Dictionary: key se value baar baar dhoondni hai.
+- HashSet: duplicate hatana, "pehle aa chuka hai?" check (used coupons).
+
+**Lab 04 result (1 lakh products, 1000 lookups):**
+```
+List.First         : 2115.524 ms
+Dictionary lookup  : 0.016 ms
+List<int>.Contains : 21.001 ms
+HashSet.Contains   : 0.014 ms
+```
+- Dictionary List.First se ~130,000 guna tez. HashSet List.Contains se ~1,500 guna tez.
+- List.First sab se sust: har element ke liye lambda (Func) chalana parta hai.
+
+**Toota:** (yahan likho)
+
+**Samajh nahi aaya:** (yahan likho)
+
+---
