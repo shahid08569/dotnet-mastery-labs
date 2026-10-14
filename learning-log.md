@@ -163,3 +163,39 @@ HashSet.Contains   : 0.014 ms
 **Samajh nahi aaya:** (yahan likho)
 
 ---
+
+## 2026-10-14 (Week 2) - Lesson 5: Generics
+
+**Concept:**
+- Generic = code with a placeholder type (`T`). Asli type tab bharta hai jab hum code use karte hain, aur compiler usko **compile time par** tay kar deta hai. Methods aur classes dono mein hota hai.
+- `T` = type parameter, sirf ek naam hai (dabba ka design, andar ka saman baad mein).
+- Type inference: compiler `T` khud samajh leta hai (`Print(5)` mein `T = int`).
+- Generic ek feature hai, property nahi.
+
+**Ek line ka ek ek lafz:** `List<T> MyWhere<T>(List<T> source, Func<T, bool> rule)`
+- `List<T>` (shuru mein) = return type, nayi list jisme pass hone wale items.
+- `MyWhere` = method ka naam.
+- `<T>` = placeholder type ka elaan.
+- `List<T> source` = input list jisko filter karna hai (asli, poori list).
+- `Func<T, bool> rule` = haan/na ka sawal, ek item lo true/false do. Har item par chalta hai.
+
+**Type safety (lab se saboot):**
+- `List<int>` mein `"hello"` dalo = compile error CS1503: cannot convert from 'string' to 'int' (run se pehle pakda gaya).
+- `List<object>` mein dalo aur `(int)mixed[1]` karo = compile OK, run par `InvalidCastException: Unable to cast object of type 'System.String' to type 'System.Int32'`.
+
+**Constraint:**
+- `where T : IComparable<T>` = compiler ko yaqeen dilata hai ke `T` mein `CompareTo` hai. Is ke bagair `Max<T>` mein `a.CompareTo(b)` error deta hai, aur jo type compare nahi ho sakta wo `Max` mein dala nahi ja sakta.
+- Common: `class`, `struct`, `new()`, `IComparable<T>`.
+
+**Pehle se generics use kar raha tha:** `List<T>`, `Dictionary<TKey, TValue>`, `Func<T, TResult>`, `IEnumerable<T>`, LINQ ka `Where<TSource>`.
+
+**Toota (meri galtiyan):**
+- Socha generic ek "property" hai. Galat, ye feature hai.
+- Socha type run time par tay hota hai. Galat, compile time par.
+- `where T : IComparable<T>` ki wajah sirf "type safety" likhi, asal wajah: compiler ko `CompareTo` ka yaqeen chahiye.
+
+**Baaqi:** Lab (b) (`where` hata ke error dekhna), `cities` wala imtihaan sawal, checkpoint jawab dobara apne alfaaz mein.
+
+**Samajh nahi aaya:** (yahan likho)
+
+---
