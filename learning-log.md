@@ -199,3 +199,45 @@ HashSet.Contains   : 0.014 ms
 **Samajh nahi aaya:** (yahan likho)
 
 ---
+
+## 2026-10-20 (Week 2) - Lesson 6: Modern C# (records, init/required, pattern matching)
+
+### Part 1: Records
+- **Record** = type for holding data. Ek line (`record Student(int RollNo, string Name, int Marks);`) se properties, constructor, ToString, ==, with mil jate hain.
+- **Positional record:** values ka order fix, properties automatically `init`.
+- **ToString():** record print karo to `Student { RollNo = 1, Name = Ali, Marks = 78 }`, class print karo to sirf class ka naam.
+- **Reference equality (class)** = same object? **Value equality (record)** = same content? Misaal: marksheet ki do photocopy.
+- **Immutable:** creation ke baad badla nahi ja sakta (error CS8852). Badalna ho to `with`.
+- **`with`:** naya copy, kuch properties badli hui, purana waisa ka waisa. `ali with { Marks = 85 }`.
+- EF Core entities ke liye record se bachna (class use karna).
+
+### Part 2: init aur required
+- **Object initializer:** `new Teacher { Name = "Hamid" }`, naam ke saath set karna.
+- **`set`** = pencil (kabhi bhi badlo), **`init`** = pen (sirf creation ke waqt, phir lock, error CS8852), **`required`** = dena zaroori (error CS9035, compile time).
+- `init` baad mein badalne se rokta hai, `required` shuru mein dena bhoolne se. Dono alag masle hal karte hain.
+
+### Part 3: Pattern matching
+- **`switch` expression:** value ko patterns se upar se neeche milata hai, pehli match ka result deta hai. `marks switch { >= 90 => "A", >= 75 => "B", >= 50 => "C", _ => "F" }`.
+- **Arm:** `pattern => result`, comma se alag. Isme `return` nahi likhte.
+- **`_` (discard):** baaqi sab kuch, hamesha aakhir mein. Pehle likha to baad ke arms kabhi nahi chalenge (compiler error CS8510).
+- **Relational pattern:** `>= 90` (right side constant). **Logical:** `and`, `or`, `not`.
+- **Property pattern:** `{ Marks: >= 50 }`. **Type pattern:** `int n => ...`, `is string text` (check aur cast ek step mein, crash nahi).
+- `_` na ho aur koi match na kare to warning CS8509 aur run time par `SwitchExpressionException`.
+
+### Checkpoint jawab
+1. Class vs record `==`: photocopy wali misaal, sahi.
+2. `init` aur `required`: sahi.
+3. `_` aakhir mein kyun: sahi.
+4. `>= 50` ko `>= 90` se pehle likhne par kya hota hai: **baaqi (pehle "pata nahi" likha tha)**. Tarteeb ka usool: upar se neeche, pehli match par ruk jata hai, to 95 marks par pehla arm hi match ho kar "C" mil jata hai.
+5. switch ka faida: clean, kai conditions ke liye behtar. Sahi.
+
+### Labs (`07-modern-csharp`)
+- Part 1 lab (7 predictions, `r1.Marks = 90;` ka error): **baaqi**
+- Part 2 lab ((a), (b), (c)): **baaqi**
+- Part 3 lab (4 predictions, (a) CS8510, (b) CS8509 + SwitchExpressionException): **baaqi**
+
+**Rule:** parhna kaafi nahi, chalana zaroori. Errors (CS8852, CS9035, CS8510) khud dekhne se yaad rehte hain.
+
+**Samajh nahi aaya:** (yahan likho)
+
+---
