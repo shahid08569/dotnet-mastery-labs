@@ -1,6 +1,6 @@
 namespace LibraryHub.Domain;
 
-public class Member
+public class Member: IEntity
 {
     public required int Id { get; init; }
     public required string Name { get; init; }
